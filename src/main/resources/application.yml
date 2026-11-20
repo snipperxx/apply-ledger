@@ -13,6 +13,9 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
+    properties:
+      # Empty values (e.g. no appliedOn on wishlist entries) sort last in both directions.
+      hibernate.order_by.default_null_ordering: last
   flyway:
     enabled: true
   mvc:

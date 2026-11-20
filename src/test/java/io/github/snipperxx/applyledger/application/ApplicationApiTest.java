@@ -178,9 +178,15 @@ class ApplicationApiTest extends IntegrationTest {
         getJson("/api/applications?open=false").andExpect(jsonPath("$.items[0].id").value(rejected));
         getJson("/api/applications?companyId=" + northwind + "&open=true")
                 .andExpect(jsonPath("$.totalItems").value(1));
+        long wishlist = createApplication(companyId, "Data Engineer", "\"status\": \"WISHLIST\"");
+        getJson("/api/applications?sort=appliedOn,desc")
+                .andExpect(jsonPath("$.items[3].id").value(wishlist));
+        getJson("/api/applications?sort=appliedOn,asc")
+                .andExpect(jsonPath("$.items[3].id").value(wishlist));
+
         getJson("/api/applications?size=1&sort=roleTitle")
                 .andExpect(jsonPath("$.items", hasSize(1)))
-                .andExpect(jsonPath("$.totalPages").value(3));
+                .andExpect(jsonPath("$.totalPages").value(4));
     }
 
     @Test
