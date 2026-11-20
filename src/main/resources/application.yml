@@ -22,6 +22,8 @@ spring:
 app:
   # "Today" for follow-ups and default status-change dates is computed in this zone.
   zone: ${APP_ZONE:Europe/Berlin}
+  # APPLIED with no answer and nothing planned for this long shows up as "stale" in /api/follow-ups.
+  stale-after-days: ${APP_STALE_AFTER_DAYS:14}
 
 management:
   endpoints:

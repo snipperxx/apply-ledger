@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 /**
@@ -17,7 +18,10 @@ import org.springframework.data.jpa.domain.Specification;
  */
 public record ApplicationSearch(Set<ApplicationStatus> statuses, Long companyId, Boolean open, String text) {
 
-    Specification<JobApplication> toSpecification() {
+    /** Most recent application date first; wishlist entries (no date) last. */
+    public static final Sort NEWEST_FIRST = Sort.by(Sort.Order.desc("appliedOn").nullsLast(), Sort.Order.desc("id"));
+
+    public Specification<JobApplication> toSpecification() {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (statuses != null && !statuses.isEmpty()) {
