@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: apply-ledger
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/applyledger}
+    username: ${DB_USER:applyledger}
+    # No default on purpose: set DB_PASSWORD in the environment or in .env.
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  mvc:
+    problemdetails:
+      enabled: true
+
+app:
+  # "Today" for follow-ups and default status-change dates is computed in this zone.
+  zone: ${APP_ZONE:Europe/Berlin}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
