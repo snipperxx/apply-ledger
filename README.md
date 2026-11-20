@@ -1,6 +1,6 @@
 # apply-ledger
 
-A small self-hosted tracker for my own job applications. It replaces the spreadsheet I kept: which companies I
+A small self-hosted tracker for my own job applications, as an alternative to a spreadsheet: which companies I
 applied to, where each application stands, what I have to do next and when, and how the search is going overall.
 
 It is a REST API (Java 21, Spring Boot 4, PostgreSQL). There is no web UI yet; use the Swagger UI, curl or any

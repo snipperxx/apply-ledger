@@ -10,7 +10,7 @@ What I plan to build next, roughly in this order. Bigger items are also open as 
   the history timeline, buttons for the allowed next statuses, follow-up list on the start page.
 - **Interviews as events**: date, time, kind (phone, technical, on-site) and notes per application; upcoming ones in
   the follow-ups; `.ics` export so they land in my calendar.
-- **CSV import**: bring over the spreadsheet I used before; dry-run mode that reports problems per row.
+- **CSV import**: bring over applications kept in a spreadsheet; dry-run mode that reports problems per row.
 
 ## v0.3: better overview
 
