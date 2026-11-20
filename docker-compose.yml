@@ -1,4 +1,6 @@
-# Local PostgreSQL for development. Values come from .env (see .env.example).
+# Values come from .env (see .env.example).
+#   docker compose up -d postgres    database only, run the app from the IDE or ./mvnw
+#   docker compose up -d --build     database and app on http://localhost:8080
 services:
   postgres:
     image: postgres:17-alpine
@@ -15,6 +17,21 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+
+  app:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME:-applyledger}
+      DB_USER: ${DB_USER:-applyledger}
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      APP_ZONE: ${APP_ZONE:-Europe/Berlin}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-}
+    ports:
+      # Only on this machine: there is no login yet (see ROADMAP.md).
+      - "127.0.0.1:8080:8080"
 
 volumes:
   pgdata:
